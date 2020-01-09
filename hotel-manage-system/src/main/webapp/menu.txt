@@ -1,0 +1,7 @@
+﻿[
+{ "id": "yhgl", iconCls: "fa fa-coffee",  text: "会员管理", children: [
+         { "id": "gg", iconCls: "fa fa-sitemap", text: "会员", url: "html/member/member-list.html"},
+         { "id": "gd", iconCls: "fa fa-sitemap", text: "会员积分历史记录查询", url: "html/member/memberlog-list.html" }
+    ]
+}
+]

@@ -1,0 +1,115 @@
+<footer>
+    <div id="exportExcel">
+        <span class="separator"></span>
+        <a class="mini-button" iconCls="icon-download" plain="true" id="exportThis" onclick="exprotExcel(this)">导出本页</a>
+        <a class="mini-button" iconCls="icon-download" plain="true" id="exportAll" onclick="exprotExcelAll(this)">导出全部</a>
+    </div>
+<script type="text/javascript">
+
+    function exprotExcel(e){
+        var grid = e.getParent().getParent();
+        var paramsStore = grid.getLoadParams();
+        var params = JSON.parse(JSON.stringify(paramsStore));
+        var columns = grid.getBottomColumns();
+//        var columns = grid.columns;
+        function getColumns(columns) {
+            columns = columns.clone();
+            for (var i= columns.length-1; i>=0;i--) {
+                var column = columns[i];
+                if(!column.field||!column.visible){
+                    columns.removeAt(i);
+                }else{
+                    var code = 0;
+                    if(column.renderer){
+                        code = 1;
+                    }
+                    var c = {header:column.header,field:column.field,width:column.width,code:code};
+                    columns[i] = c;
+                }
+            }
+            return columns;
+        }
+
+        var columns = getColumns(columns);
+        var header = mini.encode(columns);
+        var url = grid.url;
+        var reg = new RegExp("'" , "g" );
+        url = url.replace("ctx+","");
+        url = url.replace(reg,"");
+        params.url = url;
+        params.header = header;
+        /*var form = document.getElementById('exportIFrame__').contentWindow.document.getElementById('excelForm__');
+         for(var o in params){
+         if(!document.getElementById('exportIFrame__').contentWindow.document.getElementById(o)){
+         var input = $('<input name="'+o+'" id="'+o+'"/>').appendTo(form);
+         }
+         document.getElementById('exportIFrame__').contentWindow.document.getElementById(o).value = params[o];
+         }*/
+        //form.submit();
+        window.open(ctx+"/export/toExcel?"+parseParam(params));
+    }
+
+    function exprotExcelAll(e){
+        var grid = e.getParent().getParent();
+        var paramsStore = grid.getLoadParams();
+        var params = JSON.parse(JSON.stringify(paramsStore));
+        var columns = grid.getBottomColumns();
+        function getColumns(columns) {
+            columns = columns.clone();
+            for (var i= columns.length-1; i>=0;i--) {
+                var column = columns[i];
+                if(!column.field||!column.visible){
+                    columns.removeAt(i);
+                }else{
+                    var code = 0;
+                    if(column.renderer){
+                        code = 1;
+                    }
+                    var c = {header:column.header,field:column.field,width:column.width,code:code};
+                    columns[i] = c;
+                }
+            }
+            return columns;
+        }
+
+        var columns = getColumns(columns);
+        var header = mini.encode(columns);
+//        var header = columns;
+
+        var url = grid.url;
+        var reg = new RegExp("'" , "g" );
+        url = url.replace("ctx+","");
+        url = url.replace(reg,"");
+        params.url = url;
+
+//        params.url = grid.url;
+        params.header = header;
+        params.pageIndex = 0;
+        params.pageSize = 65535;
+        /*var form = document.getElementById('exportIFrame__').contentWindow.document.getElementById('excelForm__');
+         for(var o in params){
+         if(!document.getElementById('exportIFrame__').contentWindow.document.getElementById(o)){
+         var input = $('<input name="'+o+'" id="'+o+'"/>').appendTo(form);
+         }
+         document.getElementById('exportIFrame__').contentWindow.document.getElementById(o).value = params[o];
+         }*/
+        //form.submit();
+        window.open(ctx+"/export/toExcel?"+parseParam(params));
+
+    }
+
+    //将对象转成url 参数
+    var parseParam=function(param, key){
+        var paramStr="";
+        if(param instanceof String||param instanceof Number||param instanceof Boolean){
+            paramStr+="&"+key+"="+encodeURIComponent(param);
+        }else{
+            $.each(param,function(i){
+                var k=key==null?i:key+(param instanceof Array?"["+i+"]":"."+i);
+                paramStr+='&'+parseParam(this, k);
+            });
+        }
+        return paramStr.substr(1);
+    };
+</script>
+    </footer>

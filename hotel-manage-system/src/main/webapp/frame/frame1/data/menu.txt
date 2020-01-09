@@ -1,0 +1,29 @@
+﻿[
+
+{ "id": "yhgl", iconCls: "fa fa-coffee",  text: "用户管理", children: [
+         { "id": "gd", iconCls: "fa fa-sitemap", text: "股东", url: "page/SysGd-list.html" },
+          { "id": "gk", iconCls: "fa fa-sitemap", text: "顾客", url: "page/SysGk-list.html" }
+    ]
+},
+{ "id": "yjgl", iconCls: "fa fa-table", text: "佣金管理", children: [
+        { "id": "txgl", iconCls: "fa fa-puzzle-piece", text: "提现管理", url: "page/SysTx-list.html" },
+        { "id": "yjmx", iconCls: "fa fa-list-alt", text: "佣金明细", url: "pages/xsxxgl.html" },
+        { "id": "txmx", iconCls: "fa fa-list-alt", text: "提现明细", url: "page/SysTxMx-list.html" }
+    ]
+},
+{ "id": "spgl", iconCls: "fa fa-table", text: "商铺管理", children: [
+        { "id": "ptsplx", iconCls: "fa fa-puzzle-piece", text: "平台商铺类型页面", url: "page/SysSplx-list.html" },
+        { "id": "spglym", iconCls: "fa fa-list-alt", text: "商铺管理页面", url: "page/SysDpgl-list.html" }
+    ]
+},
+{ "id": "fx", iconCls: "fa fa-table", text: "分析", children: [
+        { "id": "tjfx", iconCls: "fa fa-list-alt", text: "分析", url: "pages/manage-list.html" }
+    ]
+},
+{ "id": "hd", iconCls: "fa fa-table", text: "活动", children: [
+        { "id": "hdhd", iconCls: "fa fa-list-alt", text: "活动", url: "page/SysHd-list.html" },
+         { "id": "hdk", iconCls: "fa fa-list-alt", text: "活动卡", url: "page/SysHdk-list.html" },
+          { "id": "hdkb", iconCls: "fa fa-list-alt", text: "活动卡包", url: "page/SysHdkb-list.html" }
+    ]
+}
+]

@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../../scripts/boot.js" type="text/javascript"></script>
+    <script src="../../scripts/common.js" type="text/javascript"></script>
+    <style type="text/css">
+        html, body
+        {
+            padding:0;
+            margin:0;
+            border:0;
+            height:100%;
+            overflow:hidden;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" method="post">
+        <div style="padding-left:11px;padding-bottom:5px;">
+            <table style="table-layout:fixed;" width="100%">
+                <tr>
+                    <td style="width:15%;">姓名：</td>
+                    <td style="width:85%;">
+                        <input name="membername" id="membername" class="mini-textbox" required="true" style="width: 70%"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:15%;">手机号：</td>
+                    <td style="width:85%;">
+                        <input name="memberphone" id="memberphone" class="mini-textbox" allowInput="false" required="true" vtype="float" style="width: 70%"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:15%;">生日：</td>
+                    <td style="width:85%;">
+                        <input name="memberbirthday" id="memberbirthday"  class="mini-datepicker" required="true" style="width: 70%"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:15%;">当前积分：</td>
+                    <td style="width:85%;">
+                        <input  name="memberscore" id="memberscore" class="mini-textbox" allowInput="false"  vtype="float" required="true" style="width: 70%"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:15%;">增加积分：</td>
+                    <td style="width:85%;">
+                        <input  name="addScore" id="addScore" class="mini-textbox" vtype="float" required="true" style="width: 70%"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+            </div>
+        <input name="oldPhone" id="id" class="mini-textbox" required="true" style="display: none"/>
+        </fieldset>
+        <div style="text-align:center;padding:10px;">               
+            <a class="mini-button buttoncolor2" id="confirm" onclick="onOk" style="width:60px;margin-right:20px;">确定</a>
+            <a class="mini-button buttoncolor2" onclick="onCancel" style="width:60px;">取消</a>       
+        </div>        
+    </form>
+    <script type="text/javascript">
+        $("#bbjTr").hide();
+        function onOk(e) {
+            SaveData();
+        }
+        mini.parse();
+        function sfbzj(e) {
+            if(e.value=="0"){
+                $("#bbjTr").hide();
+
+                mini.get("bbj").setValue(0)
+            }else{
+                $("#bbjTr").show();
+            }
+        }
+        var form = new mini.Form("form1");
+        function SaveData() {
+            var o = form.getData();
+            form.validate();
+            if (form.isValid() == false) return;
+            var json = JSON.parse(mini.encode([o]))[0];
+            $.ajax({
+                url:'/member/updateHmMember',
+                type: 'post',
+                data:json,
+                cache: false,
+                success: function (text) {
+                    text=JSON.parse(text);
+                    if(text.code =='00000'){
+                        showMessageDialog(text.message,CloseWindow);
+                    }else{
+                        showMessageDialog(text.message)
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(jqXHR.responseText);
+                    CloseWindow();
+                }
+            });
+        }
+
+        function onCancel(e) {
+            CloseWindow("cancel");
+        }
+        function CloseWindow(action) {
+            if (window.CloseOwnerWindow) return window.CloseOwnerWindow(action);
+            else window.close();
+        }
+
+        //回显数据
+        function SetData(data) {
+            if (data.action == "edit") {
+                data = mini.clone(data);
+                form.setData(data.data);
+                mini.get("membername").setValue(data.data.membername);
+                mini.get("memberphone").setValue(data.data.memberphone);
+                mini.get("memberbirthday").setValue(data.data.memberbirthday);
+                mini.get("memberscore").setValue(data.data.memberscore)
+            }
+        }
+        function showMessageDialog(message,cb){
+            mini.showMessageBox({
+                title: "信息提示",
+                width: 300,
+                message: message,
+                buttons : [ "ok" ],
+                showModal: true,
+                callback: function (action) {
+                    if (typeof (cb) == "function") {
+                        try {
+                            cb(action);
+                        } catch (e) {
+                            me.error("执行回调错误");
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿[
+
+{ "id": "yhgl", iconCls: "fa fa-coffee",  text: "用户管理", children: [
+         { "id": "gg", iconCls: "fa fa-sitemap", text: "高管", url: "SysGg-list.html" },
+         { "id": "gd", iconCls: "fa fa-sitemap", text: "股东", url: "SysGd-list.html" },
+         { "id": "gk", iconCls: "fa fa-sitemap", text: "顾客", url: "SysGk-list.html" },
+         { "id": "syy", iconCls: "fa fa-sitemap", text: "收银员", url: "SysSyy-list.html" }
+    ]
+},
+{ "id": "yjgl", iconCls: "fa fa-table", text: "佣金管理", children: [
+        { "id": "txgl", iconCls: "fa fa-puzzle-piece", text: "提现管理", url: "SysTx-list.html" },
+        { "id": "yjmx", iconCls: "fa fa-list-alt", text: "佣金明细", url: "SysYjmx-list.html" },
+        { "id": "txmx", iconCls: "fa fa-list-alt", text: "提现明细", url: "SysTxMx-list.html" }
+    ]
+},
+{ "id": "spgl", iconCls: "fa fa-table", text: "商铺管理", children: [
+        { "id": "mangerArea", iconCls: "fa fa-puzzle-piece", text: "地区管理", url: "SysArea-list.html" },
+        { "id": "ptsplx", iconCls: "fa fa-puzzle-piece", text: "平台商铺类型", url: "SysDpLxArea-list.html" },
+        { "id": "spglym", iconCls: "fa fa-list-alt", text: "商铺管理", url: "SysDpgl-list.html" },
+        { "id": "houseName", iconCls: "fa fa-list-alt", text: "楼盘管理", url: "SysSLp-list.html" }
+    ]
+},
+{ "id": "fx", iconCls: "fa fa-table", text: "分析", children: [
+        { "id": "tjfx", iconCls: "fa fa-list-alt", text: "分析", url: "analysis.html" }
+    ]
+},
+{ "id": "hd", iconCls: "fa fa-table", text: "活动", children: [
+        { "id": "hdhd", iconCls: "fa fa-list-alt", text: "活动", url: "SysHd-list.html" },
+         { "id": "hdk", iconCls: "fa fa-list-alt", text: "活动卡", url: "SysHdk-list.html" },
+          { "id": "hdkb", iconCls: "fa fa-list-alt", text: "活动卡包", url: "SysHdkb-list.html" }
+    ]
+},
+{ "id": "mony", iconCls: "fa fa-table", text: "充值", children: [
+           { "id": "hdTop", iconCls: "fa fa-list-alt", text: "添加充值", url: "SyshdTop-list.html" },
+           { "id": "hdTops", iconCls: "fa fa-list-alt", text: "充值记录", url: "SyshdTopJL-list.html" }
+    ]
+},
+{ "id": "lgkList", iconCls: "fa fa-table", text: "老顾客", children: [
+        { "id": "lgk", iconCls: "fa fa-list-alt", text: "老顾客", url: "SysLgk-list.html" }
+    ]
+}
+]
